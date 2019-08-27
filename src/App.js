@@ -18,6 +18,7 @@ class App extends React.Component {
   onsubscribeFromAuth = null;
 
   componentDidMount() {
+    //подписываемся на изменения (логирование, разлогирование, регистрация)
     this.onsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -28,8 +29,6 @@ class App extends React.Component {
               ...snapShot.data()
             }
           });
-
-          console.log(this.state, 888)
         })
       } else {
         this.setState({currentUser: userAuth});
