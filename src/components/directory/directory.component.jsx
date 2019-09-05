@@ -54,4 +54,6 @@ class Directory extends React.Component {
   }
 }
 
+console.log(typeof Directory, 3)
+
 export default Directory;
