@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import './custom-button.styles.scss';
 
 const CustomButton = ({children, isGoogleSignIn, inverted, ...otherProps}) => {
@@ -11,4 +10,4 @@ const CustomButton = ({children, isGoogleSignIn, inverted, ...otherProps}) => {
   );
 };
 
-export default connect()(CustomButton);
+export default CustomButton;
