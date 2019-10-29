@@ -20,17 +20,17 @@ const CartIcon = ({toggleCartHidden, itemCount}) => {
 // поэтому тут нужен селектор, который будет предотвращать повторные вычисления, если аргументы не изменились
 // хотя можно было просто itemCount считать при удалении/добавлении товаров в корзину и хранить в стейте
 // в результате этого мы также избежали бы лишних расчетов
-const mapStateToProps = ({cart: {cartItems}}) => {
-  console.log('calculated cartItems without selector');
-  return {
-    itemCount: cartItems.reduce((accumalatedQuantity, cartItem) => accumalatedQuantity + cartItem.quantity, 0),
-  }
-};
+// const mapStateToProps = ({cart: {cartItems}}) => {
+//   console.log('calculated cartItems without selector');
+//   return {
+//     itemCount: cartItems.reduce((accumalatedQuantity, cartItem) => accumalatedQuantity + cartItem.quantity, 0),
+//   }
+// };
 
-// const mapStateToProps = state => ({
-//   itemCount: selectCartItemsCount(state),
-//   // hidden: state.cart.hidden,
-// });
+const mapStateToProps = state => ({
+  itemCount: selectCartItemsCount(state),
+  // hidden: state.cart.hidden,
+});
 
 const mapDispatchToProps = dispatch => ({
   toggleCartHidden: () => dispatch(toggleCartHidden()),
