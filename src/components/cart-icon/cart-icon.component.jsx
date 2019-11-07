@@ -36,6 +36,4 @@ const mapDispatchToProps = dispatch => ({
   toggleCartHidden: () => dispatch(toggleCartHidden()),
 });
 
-console.log(typeof connect(mapStateToProps, mapDispatchToProps)(CartIcon), 2);
-
 export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
