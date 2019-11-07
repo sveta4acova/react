@@ -73,4 +73,5 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 <!---сборка проекта для продакшена--->
 * heroku create crwn-test-shop --buildpack https://github.com/mars/create-react-app-buildpack.git
 * git push heroku udemy-project:master
+* https://crwn-test-shop.herokuapp.com/
 
