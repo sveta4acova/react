@@ -9,27 +9,27 @@ import {auth} from '../../firebase/firebase.utils';
 import {connect} from 'react-redux';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
-import './header.styles.scss';
+import { HeaderContainer, LogoContainer, OptionsContainer, OptionDiv, OptionLink } from './header.styles';
 
 const Header = ({currentUser, hidden}) => {
   console.log('render header');
   return (
-    <div className="header">
-      <Link className="logo-container" to="/">
+    <HeaderContainer>
+      <LogoContainer to="/">
         <Logo className="logo" title="crown" />
-      </Link>
-      <div className="options">
-        <Link className="option" to="/shop">SHOP</Link>
-        <Link className="option" to="/contact">CONTACT</Link>
+      </LogoContainer>
+      <OptionsContainer>
+        <OptionLink to="/shop">SHOP</OptionLink>
+        <OptionLink to="/contact">CONTACT</OptionLink>
         {currentUser ? (
-          <div className="option" onClick={() => auth.signOut()}>SIGN OUT</div>
+          <OptionDiv onClick={() => auth.signOut()}>SIGN OUT</OptionDiv>
         ) : (
-          <Link className="option" to="/signin">SIGN IN</Link>
+          <OptionLink to="/signin">SIGN IN</OptionLink>
         )}
         <CartIcon/>
-      </div>
+      </OptionsContainer>
       {!hidden && <CartDropdown/>}
-    </div>
+    </HeaderContainer>
   );
 };
 

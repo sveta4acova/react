@@ -46,4 +46,39 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+//эта функция нужна была всего один раз
+//чтобы занести статичные данные в бд firebase
+export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {
+  const collectionRef = firestore.collection(collectionKey);
+  //позволит нам собрать все данные для запроса в кучу и отправить один раз
+  const batch = firestore.batch();
+
+  objectToAdd.forEach(obj => {
+    //создаем документ в коллекции
+    const docRef = collectionRef.doc();
+    //благодаря batch нам не надо отправлять запрос на каждой итерации
+    batch.set(docRef, obj);
+  });
+
+  return await batch.commit();
+};
+
+export const convertCollectionsSnapshotToMap = collections => {
+  const transformedCollection = collections.docs.map(doc => {
+    const { title, items } = doc.data();
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
+};
+
 export default firebase;
