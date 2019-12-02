@@ -7,30 +7,15 @@ import ShopPage from './pages/shop/shop.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import Header from './components/header/header.component';
-import {auth, createUserProfileDocument} from "./firebase/firebase.utils";
-import {setCurrentUser} from './redux/user/user.actions';
+import {checkUserSession} from './redux/user/user.actions';
 import './App.css';
 
 class App extends React.Component {
   onsubscribeFromAuth = null;
 
   componentDidMount() {
-    //подписываемся на изменения (логирование, разлогирование, регистрация)
-    this.onsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      const {setCurrentUser} = this.props;
-
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
-        })
-      } else {
-        setCurrentUser(userAuth);
-      }
-    })
+    const { checkUserSession } = this.props;
+    checkUserSession();
   }
 
   componentWillUnmount() {
@@ -65,7 +50,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user)),
+  checkUserSession: () => dispatch(checkUserSession()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

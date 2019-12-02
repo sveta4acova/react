@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import CollectionsOverview from '../../components/collections-overview/collections-overview.container';
 import CollectionPage from '../collection/collection.container';
 // import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
-import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions';
+import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 
 class ShopPage extends React.Component {
   // state = {
@@ -43,7 +43,7 @@ class ShopPage extends React.Component {
   //теперь то, что выше, нам не надо
 
   componentDidMount() {
-    this.props.fetchCollectionsStartAsync();
+    this.props.fetchCollectionsStart();
   }
 
   render() {
@@ -59,7 +59,7 @@ class ShopPage extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync()),
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart()),
 });
 
 export default connect(null, mapDispatchToProps)(ShopPage);
