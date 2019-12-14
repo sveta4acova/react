@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {selectCurrentUser} from './redux/user/user.selectors';
@@ -10,39 +10,28 @@ import Header from './components/header/header.component';
 import {checkUserSession} from './redux/user/user.actions';
 import './App.css';
 
-class App extends React.Component {
-  onsubscribeFromAuth = null;
-
-  componentDidMount() {
-    const { checkUserSession } = this.props;
+function App({ checkUserSession }){
+  useEffect(() => {
     checkUserSession();
-  }
+  }, [checkUserSession]);
 
-  componentWillUnmount() {
-    //отписка
-    //onAuthStateChanged возвращает функцию, вызвав которую мы удаляем слушатель событий авторизации
-    this.onsubscribeFromAuth();
-  }
-
-  render() {
-    return (
-      <div>
-        <Header/>
-        <Switch>
-          <Route exact path="/" component={HomePage}/>
-          <Route path="/shop" component={ShopPage}/>
-          <Route path="/checkout" component={CheckoutPage}/>
-          <Route exact path="/signin" render={() => {
-            return (
-              this.props.currentUser ?
-                (<Redirect to="/" />) :
-                (<SignInAndSignUpPage/>)
-            )
-          }}/>
-        </Switch>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <Header/>
+      <Switch>
+        <Route exact path="/" component={HomePage}/>
+        <Route path="/shop" component={ShopPage}/>
+        <Route path="/checkout" component={CheckoutPage}/>
+        <Route exact path="/signin" render={() => {
+          return (
+            this.props.currentUser ?
+              (<Redirect to="/" />) :
+              (<SignInAndSignUpPage/>)
+          )
+        }}/>
+      </Switch>
+    </div>
+  );
 }
 
 const mapStateToProps = state => ({
