@@ -10,7 +10,7 @@ import Header from './components/header/header.component';
 import {checkUserSession} from './redux/user/user.actions';
 import './App.css';
 
-function App({ checkUserSession }){
+function App({ checkUserSession, currentUser }){
   useEffect(() => {
     checkUserSession();
   }, [checkUserSession]);
@@ -24,7 +24,7 @@ function App({ checkUserSession }){
         <Route path="/checkout" component={CheckoutPage}/>
         <Route exact path="/signin" render={() => {
           return (
-            this.props.currentUser ?
+            currentUser ?
               (<Redirect to="/" />) :
               (<SignInAndSignUpPage/>)
           )
