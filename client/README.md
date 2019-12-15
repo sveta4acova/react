@@ -83,3 +83,6 @@ heroku config:set STRIPE_SECRET_KEY=...
 git commit --allow-empty -m "empty commit"
 git push heroku udemy-project:master
 
+<!---еще пушиться не хотел--->
+heroku git:remote -a crwn-test-shop
+
