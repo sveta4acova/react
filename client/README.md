@@ -75,3 +75,11 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 * git push heroku udemy-project:master
 * https://crwn-test-shop.herokuapp.com/
 
+### add stripe secret key to heroku
+<!---т.к. пушить его нельзя--->
+heroku config:set STRIPE_SECRET_KEY=...
+
+<!---новый билд не случился, пришлось делать следующее:--->
+git commit --allow-empty -m "empty commit"
+git push heroku udemy-project:master
+

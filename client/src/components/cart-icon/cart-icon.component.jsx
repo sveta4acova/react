@@ -6,8 +6,7 @@ import {selectCartItemsCount} from '../../redux/cart/cart.selectors';
 import {ReactComponent as ShoppingIcon} from '../../assets/shopping-bag.svg';
 import './cart-icon.styles.scss';
 
-const CartIcon = ({toggleCartHidden, itemCount}) => {
-  console.log('render cart-icon');
+const CartIcon = ({toggleCartHidden, itemCount}) => {;
   return (
     <div className="cart-icon" onClick={toggleCartHidden}>
       <ShoppingIcon className="shopping-icon"/>
@@ -21,7 +20,6 @@ const CartIcon = ({toggleCartHidden, itemCount}) => {
 // хотя можно было просто itemCount считать при удалении/добавлении товаров в корзину и хранить в стейте
 // в результате этого мы также избежали бы лишних расчетов
 // const mapStateToProps = ({cart: {cartItems}}) => {
-//   console.log('calculated cartItems without selector');
 //   return {
 //     itemCount: cartItems.reduce((accumalatedQuantity, cartItem) => accumalatedQuantity + cartItem.quantity, 0),
 //   }
