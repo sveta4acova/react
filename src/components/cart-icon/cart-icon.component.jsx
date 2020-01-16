@@ -1,39 +1,17 @@
-import React from 'react';
-import {connect} from 'react-redux';
-
-import {toggleCartHidden} from '../../redux/cart/cart.actions';
-import {selectCartItemsCount} from '../../redux/cart/cart.selectors';
+import React, {useContext} from 'react';
 import {ReactComponent as ShoppingIcon} from '../../assets/shopping-bag.svg';
+import { CartContext } from '../../providers/cart/cart.provider';
 import './cart-icon.styles.scss';
 
-const CartIcon = ({toggleCartHidden, itemCount}) => {
-  console.log('render cart-icon');
+const CartIcon = () => {
+  const { toggleHidden, cartItemsCount } = useContext(CartContext);
+
   return (
-    <div className="cart-icon" onClick={toggleCartHidden}>
+    <div className="cart-icon" onClick={toggleHidden}>
       <ShoppingIcon className="shopping-icon"/>
-      <span className="item-count">{itemCount}</span>
+      <span className="item-count">{cartItemsCount}</span>
     </div>
   )
 };
 
-// в результате этого кода каждый раз будет пересчитываться значение itemCount
-// поэтому тут нужен селектор, который будет предотвращать повторные вычисления, если аргументы не изменились
-// хотя можно было просто itemCount считать при удалении/добавлении товаров в корзину и хранить в стейте
-// в результате этого мы также избежали бы лишних расчетов
-// const mapStateToProps = ({cart: {cartItems}}) => {
-//   console.log('calculated cartItems without selector');
-//   return {
-//     itemCount: cartItems.reduce((accumalatedQuantity, cartItem) => accumalatedQuantity + cartItem.quantity, 0),
-//   }
-// };
-
-const mapStateToProps = state => ({
-  itemCount: selectCartItemsCount(state),
-  // hidden: state.cart.hidden,
-});
-
-const mapDispatchToProps = dispatch => ({
-  toggleCartHidden: () => dispatch(toggleCartHidden()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);
+export default CartIcon;
