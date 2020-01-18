@@ -1,10 +1,11 @@
-import React, { } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
-import CollectionsOverview from '../../components/collections-overview/collections-overview.container';
-import CollectionPage from '../collection/collection.container';
 // import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
 import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
+
+const CollectionPage = lazy(() => import('../collection/collection.container'));
+const CollectionsOverview = lazy(() => import('../../components/collections-overview/collections-overview.container'));
 
 class ShopPage extends React.Component {
   // state = {
@@ -51,8 +52,10 @@ class ShopPage extends React.Component {
 
     return (
       <div className="shop-page">
-        <Route exact path={`${match.path}`} component={CollectionsOverview} />
-        <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
+        <Suspense fallback={<div>...Loading</div>}>
+          <Route exact path={`${match.path}`} component={CollectionsOverview} />
+          <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
+        </Suspense>
       </div>
     );
   }
