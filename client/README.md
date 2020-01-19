@@ -72,6 +72,9 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 * heroku login
 <!---сборка проекта для продакшена--->
 * heroku create crwn-test-shop --buildpack https://github.com/mars/create-react-app-buildpack.git
+<!---udemy-project - лок.ветка, из нее в мастер пушу--->
+<!---если локально работа в мастере ведется, то команда такая--->
+<!---git push heroku master--->
 * git push heroku udemy-project:master
 * https://crwn-test-shop.herokuapp.com/
 
@@ -86,3 +89,5 @@ git push heroku udemy-project:master
 <!---еще пушиться не хотел--->
 heroku git:remote -a crwn-test-shop
 
+<!---открыть проект в браузере--->
+heroku open
