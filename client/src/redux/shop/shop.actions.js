@@ -25,4 +25,4 @@ export const fetchCollectionsStartAsync = () => {
       dispatch(fetchCollectionsSuccess(collectionsMap));
     }).catch(e => dispatch(fetchCollectionsFailure(e.message)));
   }
-}
+};
